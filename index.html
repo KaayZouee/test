@@ -13,10 +13,8 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-VF3S4BSFST');
     </script>
-
 </head>
 <body>
 
@@ -28,19 +26,19 @@
             Every mind runs on an Operating System. Some are built for war, others for creation, others for control.<br><br>
             This diagnostic tool will analyze your <strong>Energy</strong>, <strong>Control</strong>, and <strong>Threat</strong> response systems to reveal your mythical archetype and your fatal system error.
         </p>
-        <button class="btn" onclick="startQuiz()">Initialize System</button>
+        <button type="button" class="btn" onclick="startQuiz()">Initialize System</button>
     </div>
 
     <div id="quiz-screen" style="display: none;">
         <div class="progress-container">
             <div class="progress-fill" id="progress-bar"></div>
         </div>
-        <form id="quiz-form">
-            </form>
-        <button class="btn" onclick="prevQuestion()" style="background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #cbd5e1;">
+        <form id="quiz-form"></form>
+
+        <button type="button" class="btn" onclick="prevQuestion()" style="background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #cbd5e1;">
             Previous Command
         </button>
-        <button class="btn" onclick="nextQuestion()">Next Command</button>
+        <button type="button" class="btn" onclick="nextQuestion()">Next Command</button>
     </div>
 
     <div id="result-screen" class="result-view">
@@ -87,8 +85,8 @@
         </div>
 
         <div class="content-block">
-            <button class="btn" onclick="shareResult()">Share Result</button>
-            <button class="btn" onclick="followFacebook()" style="background: transparent; border: 1px solid rgba(255,255,255,0.2); margin-top: 12px; color: #cbd5e1;">
+            <button type="button" class="btn" onclick="shareResult()">Share Result</button>
+            <button type="button" class="btn" onclick="followFacebook()" style="background: transparent; border: 1px solid rgba(255,255,255,0.2); margin-top: 12px; color: #cbd5e1;">
                 Follow on Facebook
             </button>
         </div>
@@ -105,12 +103,11 @@
             <p>Optional feedback:</p>
             <textarea id="feedback-text" rows="3" placeholder="Anything you want to tell us (optional)" style="width:100%;"></textarea>
 
-            <button class="btn" onclick="submitFeedback()" style="margin-top: 12px;">Send Feedback</button>
+            <button type="button" class="btn" onclick="submitFeedback()" style="margin-top: 12px;">Send Feedback</button>
             <p id="feedback-status" style="font-size: 0.85rem; opacity: 0.7; display:none; margin-top: 10px;"></p>
         </div>
 
-
-        <button class="btn" onclick="window.location.reload()" style="background: transparent; border: 1px solid rgba(255,255,255,0.2); margin-top: 30px; color: #cbd5e1;">Restart Diagnostic</button>
+        <button type="button" class="btn" onclick="window.location.reload()" style="background: transparent; border: 1px solid rgba(255,255,255,0.2); margin-top: 30px; color: #cbd5e1;">Restart Diagnostic</button>
     </div>
 </div>
 
