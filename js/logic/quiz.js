@@ -50,7 +50,7 @@ function initQuiz() {
     div.className = `question-card`;
     div.id = `q-${index}`;
     div.innerHTML = `
-      <div class="question-text">${index + 1}/${questions.length}: ${q.text}</div>
+      <div class="question-text">${q.text}</div>
       <div class="options">
         ${[1, 2, 3, 4, 5].map(val => `
           <label class="option-label">
