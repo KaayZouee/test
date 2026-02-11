@@ -7,7 +7,7 @@ export const archetypes = {
 
         desc: `
             <div class="report-section">
-                <h3 class="report-header">💀 THE ROAST (Start Here)</h3>
+                <h3 class="report-header">💀 THE ROAST</h3>
                 <p>Let’s be honest: <strong>You are exhausted, and you think it’s everyone else’s fault.</strong></p>
                 <p>You walk through life with a silent scoreboard in your head, tracking how much <em>you</em> do versus how little <em>they</em> do. You are the "Designated Adult" in every room. You secretly believe that if you stopped pushing, the entire world would grind to a halt—and the tragic part is, you’ve probably rigged your life so that’s actually true.</p>
                 <p>You aren’t just "organized." You are <strong>addicted to certainty</strong>. You try to pre-plan conversations, pre-feel emotions, and pre-solve problems that haven't happened yet. You call this "being prepared." Psychology calls it "High-Functioning Anxiety wearing a suit."</p>
@@ -393,135 +393,140 @@ export const archetypes = {
         },
 
     "HEPHAESTUS": {
-  name: "HEPHAESTUS",
-  role: "THE MAKER",
-  img: "img/Hephaestus.png",
+    name: "HEPHAESTUS",
+    role: "THE DEEP MAKER",
+    img: "img/Hephaestus.png",
+    code: "Low E • Low C • Low T",
 
-  desc: `
-    <p><strong>(Low Energy • High Control • Low Threat)</strong></p>
-    <p><em>"Quiet hands. Sharp tools. No applause needed."</em></p>
+    desc: `
+        <div class="report-section">
+            <h3 class="report-header">💀 THE ROAST</h3>
+            <p><strong>You prefer tools to humans because tools don't have changing moods.</strong></p>
+            <p>You aren't just "introverted"; you are <strong>selectively mute</strong> around inefficiency. You have structured your life to minimize "social transaction costs." You view small talk not just as boring, but as a literal tax on your battery. You are the person who can focus for 12 hours straight but needs a 2-hour nap after a 15-minute phone call.</p>
+            <p>You hide in your work. You tell yourself you are "dedicated to the craft," but often you are just <strong>hiding from the chaos of intimacy</strong>. It is easier to debug code or sculpt clay than to navigate the messy, illogical emotions of another human being.</p>
+        </div>
 
-    <br>
-    <strong>⚒️ The Operating System: Craft, Process, Mastery</strong>
-    <p>You operate on the <strong>Forge OS</strong>—a system optimized for deep work, precision, and building things that last. While others chase attention or novelty, you chase <strong>integrity</strong>: the clean join, the stable system, the design that doesn’t break at scale.</p>
-    <p>Your low energy doesn’t mean you’re weak—it often means your mind is built for <strong>sustained focus</strong> rather than constant social output. You recharge in solitude and become powerful in silence. You’re the person who can work for hours without needing external stimulation because the work itself is the stimulus.</p>
+        <br>
+        <div class="report-section">
+            <h3 class="report-header">🔨 THE OPERATING SYSTEM</h3>
+            <p><strong>System Core: Conservation of Energy.</strong></p>
+            <p>You operate on the <strong>Maker OS</strong>. You have "Low Threat" sensitivity, which gives you a superpower: <strong>Immunity to Drama</strong>. You don't scan the room for approval. You don't care about status games. You care about <em>output</em>.</p>
+            <p><strong>Cognitive Style: The Tunnel Vision.</strong></p>
+            <p>Your brain is designed for <strong>Deep Work</strong>. You don't multitask. You go deep. You are one of the few archetypes capable of true "Flow State" on command. However, this means you struggle with "Context Switching." When someone interrupts you, you react with disproportionate internal rage because they didn't just break your focus—they broke your world.</p>
+        </div>
 
-    <br>
-    <strong>🧠 Cognitive Signature: Conscientious Flow</strong>
-    <p>In psychological terms, your strengths often resemble high <strong>conscientiousness</strong> and strong <strong>task persistence</strong>. You naturally create order. You think in sequences. You respect constraints. And because your Threat is low, you don’t panic easily—you just keep forging.</p>
-    <p>This makes you the backbone of teams. When everyone else is brainstorming, you are shipping. When everyone else is arguing, you are making it real.</p>
+        <br>
+        <div class="report-section">
+            <h3 class="report-header">🧊 THE FATAL ERROR: "THE OBSERVER TRAP"</h3>
+            <p>Your bug is <strong>Detachment</strong>.</p>
+            <p>You treat life like a simulation that you are watching, rather than playing. You stay on the sidelines, analyzing, building, and fixing, but rarely <em>feeling</em>.</p>
+            <p><strong>The Relational Glitch:</strong></p>
+            <ol style="text-align: left; margin-top: 10px; padding-left: 20px;">
+                <li>You prioritize your projects over people.</li>
+                <li>People try to connect with you, but you feel "busy."</li>
+                <li>They stop trying because you seem indifferent.</li>
+                <li>You notice they are gone, shrug, and go back to work.</li>
+                <li>Decades later, you realize you built a masterpiece but have no one to show it to.</li>
+            </ol>
+        </div>
 
-    <br>
-    <strong>🏗️ Identity: Competence as Peace</strong>
-    <p>You often experience calm through competence. When your environment is messy, you build structure. When your emotions are messy, you build something tangible. Your therapy is often: <em>make it work</em>.</p>
+        <br>
+        <div class="report-section">
+            <h3 class="report-header">💞 SOCIAL DYNAMICS</h3>
+            <p><strong>Love Language: Service (from a distance).</strong></p>
+            <p>You show love by fixing things. You fixed their car? That was a sonnet. You upgraded their RAM? That was a marriage proposal. You are confused when they want "quality time" (talking about nothing) because you assume <em>utility</em> is the highest form of love.</p>
+            <p><strong>The Conflict Pattern:</strong></p>
+            <p>You don't fight. You <strong>Shut Down</strong>. You go into "Low Power Mode." Your partner screams, and you just stare blankly, waiting for them to run out of logic errors.</p>
+        </div>
+    `,
 
-    <br>
-    <strong>🌟 When You’re Healthy</strong>
-    <ul style="text-align: left; margin-top: 10px;">
-      <li>You become a master builder who produces quietly legendary work.</li>
-      <li>You don’t need validation—your output becomes your reputation.</li>
-      <li>You model stability in a world addicted to noise.</li>
-    </ul>
-  `,
+    bug: `
+        <strong>⛔ CRITICAL FAILURE: The "Object Over People" Bias</strong>
+        <p>You find comfort in things—systems, code, wood, metal—because they obey the laws of physics. Humans do not. Your fatal flaw is treating humans like broken machines that need "troubleshooting" rather than emotional beings that need "witnessing."</p>
+    `,
 
-  bug: `
-    <strong>🧱 System Error: The Silo Trap</strong>
-    <p>Your code has a critical glitch: <strong>self-isolation disguised as independence</strong>.</p>
-
-    <br>
-    <strong>🕳️ The Silent Load</strong>
-    <p>You tend to carry frustration privately. You notice inefficiency, laziness, and shallow talk—but you rarely speak up. Instead, you do what you always do: you absorb the burden and keep building. Over time, this becomes quiet resentment.</p>
-
-    <br>
-    <strong>🔩 Rigidity Under Change</strong>
-    <p>Because you’re a process person, sudden changes can feel like sabotage. When the plan shifts, you may freeze, shut down, or stubbornly cling to “the right way.” Your strength becomes stiffness.</p>
-
-    <br>
-    <strong>🔥 Burnout in Silence</strong>
-    <p>Your burnout doesn’t look dramatic. It looks like withdrawal, numbness, and a slow loss of pride in the craft. You keep producing, but the soul leaves the work.</p>
-  `,
-
-  fix: `
-    <strong>🛠️ Patch v1.0: Open Source</strong>
-    <p>Your evolution is not “work harder.” It’s <strong>connect earlier</strong>.</p>
-
-    <ul style="text-align: left; margin-top: 10px;">
-      <li><strong>Share the Draft:</strong> Show your work at 60%, not 100%. Early feedback prevents wasted perfection.</li>
-      <li><strong>Ask as Efficiency:</strong> Asking for help isn’t weakness—it’s bandwidth management. Ten minutes of alignment can save ten hours of rework.</li>
-      <li><strong>Translate Your Logic:</strong> People can’t support what they can’t see. Say the sentence you avoid: “I need X by Friday.”</li>
-      <li><strong>Flex Training:</strong> Practice deliberate adaptability: change one small process each week so your nervous system learns, “change isn’t danger.”</li>
-      <li><strong>Social Capital:</strong> Soft skills aren’t decoration. They’re infrastructure. Relationships are what protect your craft in real organizations.</li>
-    </ul>
-
-    <p><strong>Final upgrade:</strong> Hephaestus becomes unstoppable when his work stops living in a cave and starts living in the world.</p>
-  `
+    fix: `
+        <div class="report-section">
+            <h3 class="report-header">🛠️ THE PATCH: "THE INTERFACE PROTOCOL"</h3>
+            <p>You don't need to change your nature. You need to build a better <strong>User Interface</strong> for your personality.</p>
+            
+            <ul style="text-align: left; margin-top: 15px;">
+                <li><strong>The "5-Minute" Bridge:</strong> You don't need to be social for hours. Just give 5 minutes of undivided, phone-down attention to your key people every day. That is the maintenance cost of a relationship.</li>
+                <li><strong>Narrate Your Process:</strong> People think you are angry when you are quiet. Fix this by narrating: <em>"I am not mad, I am just thinking deeply about this problem."</em> This one sentence saves marriages.</li>
+                <li><strong>Ship It Imperfectly:</strong> You hide in the "refinement phase" to avoid judgment. Force yourself to show your work before it is ready. Feedback is not an attack; it is data.</li>
+            </ul>
+            <p><strong>Final Command:</strong> The sword is useless if it stays in the forge. You must bring your work—and yourself—out into the light.</p>
+        </div>
+    `
 },
 
 
 "ARTEMIS": {
-  name: "ARTEMIS",
-  role: "THE HUNTER",
-  img: "img/Artemis.png",
+    name: "ARTEMIS",
+    role: "THE LONE HUNTER",
+    img: "img/Artemis.png",
+    code: "Low E • Low C • High T",
 
-  desc: `
-    <p><strong>(Low Energy • Low Control • High Threat)</strong></p>
-    <p><em>"Freedom first. Everything else negotiable."</em></p>
+    desc: `
+        <div class="report-section">
+            <h3 class="report-header">💀 THE ROAST</h3>
+            <p>Let’s cut to the core: <strong>You are not just "independent." You are allergic to dependency.</strong></p>
+            <p>You have built your entire personality around the concept of <strong>Self-Sufficiency</strong>. To you, "needing" someone feels like a debt, and "asking for help" feels like a defeat. You likely have a mental "Go Bag" packed at all times—you are always ready to walk away from a job, a relationship, or a city the moment it starts to feel like a cage.</p>
+            <p>You are the person who says, <em>"I'm fine,"</em> and actually means it—but you use "I'm fine" as a shield to keep people from getting close enough to see that you are actually lonely. You protect your peace so aggressively that you sometimes protect yourself right out of human connection.</p>
+        </div>
 
-    <br>
-    <strong>🌙 The Operating System: Independence & Alertness</strong>
-    <p>You operate on the <strong>Hunter OS</strong>—a system optimized for autonomy, sharp perception, and rapid exit routes. You don’t crave control; you crave <strong>space</strong>. You don’t feel safe when you’re owned, managed, trapped, or dependent.</p>
-    <p>Your <strong>High Threat</strong> signature makes you hyper-attuned to risk: social manipulation, hidden motives, power games, emotional hooks. Where others see “normal,” you see the trapdoor.</p>
+        <br>
+        <div class="report-section">
+            <h3 class="report-header">🌙 THE OPERATING SYSTEM</h3>
+            <p><strong>System Core: Autonomy Defense.</strong></p>
+            <p>Your "High Threat" score does not mean you are scared of the world; it means you are <strong>Territorial</strong>. Unlike Hera (who controls the outcome) or Aphrodite (who reads the room), you simply want to secure your perimeter.</p>
+            <p><strong>Cognitive Filter: The Intrusion Radar.</strong></p>
+            <p>You naturally filter out social noise, gossip, and trends (Low Energy). Your radar only pings when it detects an <strong>Infringement</strong> on your freedom. You don't care what people think of you; you care if they try to <em>manage</em> you.</p>
+        </div>
 
-    <br>
-    <strong>🧠 Cognitive Gift: Pattern Detection & Boundary Instinct</strong>
-    <p>You read micro-signals: inconsistencies, tone shifts, performative kindness, subtle pressure. In psychology, this can resemble elevated <strong>threat monitoring</strong> and strong <strong>protective boundaries</strong>. You’re hard to fool—not because you’re cynical, but because you pay attention.</p>
+        <br>
+        <div class="report-section">
+            <h3 class="report-header">🧊 THE FATAL ERROR: "COUNTER-DEPENDENCE"</h3>
+            <p>Your bug is a psychological mechanism called <strong>Counter-Dependence</strong>.</p>
+            <p>This is the opposite of co-dependency. Instead of clinging to others, you push them away preemptively. The cycle looks like this:</p>
+            <ol style="text-align: left; margin-top: 10px; padding-left: 20px;">
+                <li>Someone tries to get close or offer help.</li>
+                <li>Your system tags this as "Obligation" or "Loss of Control."</li>
+                <li>You withdraw or put up a cold wall (Low Energy Defense).</li>
+                <li>They back off, confused.</li>
+                <li>You feel safe again, but also isolated.</li>
+            </ol>
+            <p><strong>The Glitch:</strong> You confuse "Intimacy" with "Invasion." You think you are winning by being strong, but you are actually losing by being unreachable.</p>
+        </div>
 
-    <br>
-    <strong>🏹 Identity: The Self-Reliant Survivor</strong>
-    <p>You often developed competence early. You learned to rely on yourself because relying on others felt unreliable. So you became good: at leaving, at enduring, at adapting, at not needing.</p>
-    <p>When healthy, this is strength. You can walk alone without collapsing. You can build a life with minimal approval-seeking. You know who you are.</p>
+        <br>
+        <div class="report-section">
+            <h3 class="report-header">💞 SOCIAL & ROMANTIC DYNAMICS</h3>
+            <p><strong>The "Feral Cat" Energy.</strong></p>
+            <p>In relationships, you are like a feral cat: you come close on <em>your</em> terms, but if someone chases you, you bolt. You value "parallel play"—being in the same room but doing different things.</p>
+            <p><strong>The Conflict Pattern:</strong></p>
+            <p>You don't scream and fight (that takes too much energy). You <strong>Ghost</strong>. You detach emotionally long before you leave physically. Your partners often feel like they are dating a ghost—you are physically there, but they can't quite touch you.</p>
+        </div>
+    `,
 
-    <br>
-    <strong>🌟 When You’re Healthy</strong>
-    <ul style="text-align: left; margin-top: 10px;">
-      <li>You embody clean independence, not fear-driven distance.</li>
-      <li>You choose solitude as nourishment—not as armor.</li>
-      <li>You become a fierce protector who also knows how to receive.</li>
-    </ul>
-  `,
+    bug: `
+        <strong>⛔ CRITICAL FAILURE: The "Porcupine Paradox"</strong>
+        <p>You crave deep connection (everyone does), but your defenses make it impossible. You are covered in spikes. You want to be held, but you prick anyone who tries. Eventually, people stop trying, and you tell yourself: <em>"See? I knew I was better off alone."</em> It is a self-fulfilling prophecy of solitude.</p>
+    `,
 
-  bug: `
-    <strong>🧊 System Error: Defensive Walls</strong>
-    <p>Your code has a critical glitch: <strong>your Threat radar confuses intimacy with danger</strong>.</p>
-
-    <br>
-    <strong>🏰 The Drawbridge Reflex</strong>
-    <p>When someone gets close, your system asks: “What will they want from me?” You anticipate control, obligation, disappointment, or betrayal—so you preemptively retreat. You call it independence, but it often functions like a <strong>protective reflex</strong>.</p>
-
-    <br>
-    <strong>🕳️ The Lonely Safety</strong>
-    <p>You can build a life that is perfectly safe… and quietly empty. The cost of never being hurt is never being fully known.</p>
-
-    <br>
-    <strong>🧠 Core Belief Under the Bug</strong>
-    <p><em>"If I need someone, I will lose my freedom."</em></p>
-    <p>This belief can be historically understandable—and currently limiting.</p>
-  `,
-
-  fix: `
-    <strong>🧭 Patch v1.0: Trust Protocol</strong>
-    <p>You don’t need blind trust. You need <strong>calibrated trust</strong>: earned, tested, staged.</p>
-
-    <ul style="text-align: left; margin-top: 10px;">
-      <li><strong>Tiered Access:</strong> Not everyone gets the same version of you. Create levels: acquaintance → friend → inner circle. Your nervous system relaxes when access is structured.</li>
-      <li><strong>Micro-Trust Experiments:</strong> Share one small truth. Ask for one small help. Watch what happens. Trust is built through data, not fantasy.</li>
-      <li><strong>Boundary Language:</strong> “I need space tonight.” “I’m not available for that.” Clear boundaries prevent resentment and keep freedom intact.</li>
-      <li><strong>Repair Practice:</strong> Don’t vanish after conflict. Try one repair attempt before exiting. Leaving is easy. Repair is mastery.</li>
-      <li><strong>Choose One Anchor:</strong> Pick one person this month to let in slightly deeper. You don’t have to hunt alone forever.</li>
-    </ul>
-
-    <p><strong>Final upgrade:</strong> Artemis becomes mythic when she learns that intimacy can be chosen—not endured.</p>
-  `
+    fix: `
+        <div class="report-section">
+            <h3 class="report-header">🛠️ THE PATCH: "CALIBRATED VULNERABILITY"</h3>
+            <p>Independence is a skill you mastered in childhood. <strong>Interdependence</strong> is the Master Level skill you are avoiding.</p>
+            
+            <ul style="text-align: left; margin-top: 15px;">
+                <li><strong>The "Safe Harbor" Rule:</strong> Identify ONE person (friend or partner) who has proven they are not trying to control you. Explicitly lower your bridge for them. Tell them: <em>"I am trying to let you in, but it scares me."</em></li>
+                <li><strong>Ask For Low-Stakes Help:</strong> Break your "I don't need anyone" streak. Ask someone to hold a door, grab a coffee, or proofread an email. Train your brain that receiving help does not equal debt.</li>
+                <li><strong>Stay in the Room:</strong> When you feel the urge to shut down or leave during a conflict, force yourself to stay physically present for 2 more minutes. Prove to your nervous system that you can survive discomfort without fleeing.</li>
+            </ul>
+            <p><strong>Final Command:</strong> You have already proven you can survive alone. Now, prove you are brave enough to need someone else.</p>
+        </div>
+    `
 },
 
 
