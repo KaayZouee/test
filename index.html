@@ -83,6 +83,30 @@
             <p id="result-fix">Loading...</p>
         </div>
 
+        <div class="content-block">
+            <button class="btn" onclick="shareResult()">Share Result</button>
+            <button class="btn" onclick="followFacebook()" style="background: transparent; border: 1px solid rgba(255,255,255,0.2); margin-top: 12px; color: #cbd5e1;">
+                Follow on Facebook
+            </button>
+        </div>
+
+        <div class="content-block">
+            <div class="section-title">📝 FEEDBACK</div>
+            <p style="margin-top: 0;">How accurate was your result?</p>
+
+            <div style="display:flex; align-items:center; gap:12px;">
+                <input id="feedback-rating" type="range" min="1" max="10" step="1" value="7" style="flex: 1;">
+                <span id="feedback-value">7</span>
+            </div>
+
+            <p>Optional feedback:</p>
+            <textarea id="feedback-text" rows="3" placeholder="Anything you want to tell us (optional)" style="width:100%;"></textarea>
+
+            <button class="btn" onclick="submitFeedback()" style="margin-top: 12px;">Send Feedback</button>
+            <p id="feedback-status" style="font-size: 0.85rem; opacity: 0.7; display:none; margin-top: 10px;"></p>
+        </div>
+
+
         <button class="btn" onclick="window.location.reload()" style="background: transparent; border: 1px solid rgba(255,255,255,0.2); margin-top: 30px; color: #cbd5e1;">Restart Diagnostic</button>
     </div>
 </div>

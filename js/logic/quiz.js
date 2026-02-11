@@ -8,6 +8,12 @@ let currentQ = 0;
 let quizStarted = false;
 const form = document.getElementById('quiz-form');
 
+let lastResult = null;
+
+export function getLastResult() {
+    return lastResult;
+}
+
 function initQuiz() {
     questions.forEach((q, index) => {
         const div = document.createElement('div');
@@ -112,6 +118,8 @@ function calculateResult() {
         else if (!E && !C && T) type = "ARTEMIS";
         else type = "HESTIA";
     }
+
+    lastResult = { sE, sC, sT, sS, type };
 
     // Track completion
     track('quiz_complete', { archetype: type });
