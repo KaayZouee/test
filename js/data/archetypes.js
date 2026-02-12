@@ -152,65 +152,60 @@ export const archetypes = {
         name: "APHRODITE",
         role: "THE MUSE",
         img: "img/Aphrodite.png",
+        code: "High E • Low C • High T",
 
         desc: `
-            <p><strong>(High Energy • Low Control • High Threat)</strong></p>
-            <p><em>"I don’t just feel emotions. I become weather."</em></p>
+            <div class="report-section">
+                <h3 class="report-header">💀 THE ROAST</h3>
+                <p><strong>You don't just feel emotions; you become weather patterns.</strong></p>
+                <p>You are addicted to "The Spark." You chase the beginning of things—relationships, projects, eras—because that is when reality feels magical. But the moment the magic fades and the mundane work begins, you feel a physical crash that resembles withdrawal.</p>
+                <p>You treat your own life like a movie, and you get anxious if the plot isn't moving fast enough. You are magnetic, yes. But you are also exhausting, because you require constant "inputs" (attention, validation, drama, novelty) to feel alive.</p>
+            </div>
 
             <br>
-            <strong>💗 The Operating System: Emotional Voltage & Aesthetic Gravity</strong>
-            <p>You operate on the <strong>Muse OS</strong>—a system engineered for emotional depth, social resonance, and sensory intelligence. You don’t merely notice vibes; you <em>generate</em> them. You can walk into a room and feel its emotional temperature before anyone speaks.</p>
-            <p>Your <strong>High Threat sensitivity</strong> doesn’t mean you’re paranoid—it means you’re highly reactive to social signals: tone, facial micro-shifts, rejection cues, approval, distance. You’re tuned like a professional instrument. In psychology, this often maps to <strong>high sensitivity</strong> and strong <strong>social salience detection</strong>.</p>
+            <div class="report-section">
+                <h3 class="report-header">💗 THE OPERATING SYSTEM</h3>
+                <p><strong>System Core: High Voltage / Low Insulation.</strong></p>
+                <p>You operate on the <strong>Muse OS</strong>. You have <strong>High Energy</strong> (you want to engage) combined with <strong>High Threat</strong> (you are terrified of rejection). This makes you hypersensitive. You can read a room instantly, but you also over-read every micro-expression. If someone is quiet, you assume they hate you.</p>
+                <p><strong>The Superpower: Resonance.</strong></p>
+                <p>You make people feel <em>seen</em>. You have a gift for bypassing small talk and hitting the emotional core. You inspire people, not through logic, but through sheer <strong>Vibrancy</strong>. You are the color in a black-and-white world.</p>
+            </div>
 
             <br>
-            <strong>🎨 Creative Intelligence: Meaning-Making</strong>
-            <p>You metabolize life into beauty: style, story, humor, romance, art, identity. You make people feel more alive—because your emotional system gives them permission to feel. When you’re healthy, you’re not “dramatic.” You’re <strong>vivid</strong>.</p>
+            <div class="report-section">
+                <h3 class="report-header">🌪️ THE FATAL ERROR: "THE ROLLERCOASTER"</h3>
+                <p>Your bug is <strong>Emotional Volatility</strong>.</p>
+                <p>You lack a "Control" module to regulate your inputs. When you are up, you are manic-pixie-dream-perfect. When you are down, the world is ending. You don't have "bad days"; you have tragedies.</p>
+                <p><strong>The Glitch:</strong> <em>"If I am not feeling it intensely, it isn't real."</em> This makes stability feel boring to you, so you subconsciously create chaos just to feel something.</p>
+            </div>
 
             <br>
-            <strong>🧲 Social Magnetism</strong>
-            <p>You are often unforgettable because you do what most people fear: you show emotion openly. That authenticity creates intimacy fast. People don’t just like you—they feel <em>seen</em> by you.</p>
-
-            <br>
-            <strong>🌟 When You’re Healthy</strong>
-            <ul style="text-align: left; margin-top: 10px;">
-            <li>You channel emotion into creation, not chaos.</li>
-            <li>You become a muse who inspires without needing to be rescued.</li>
-            <li>You hold your sensitivity like a superpower, not a wound.</li>
-            </ul>
+            <div class="report-section">
+                <h3 class="report-header">💞 SOCIAL & ROMANTIC DYNAMICS</h3>
+                <p><strong>Love Language: Intensity.</strong></p>
+                <p>You merge with people fast. You idealize them, put them on a pedestal, and then crash when they turn out to be human. You are prone to "Limerence"—addictive obsession with a person—rather than real, grounded love.</p>
+            </div>
         `,
 
         bug: `
-            <strong>🌪️ System Error: Emotional Volatility</strong>
-            <p>Your code has a critical glitch: your system lacks a strong <strong>Control module</strong>. Emotion rises fast and takes the steering wheel.</p>
-
-            <br>
-            <strong>💥 The Spike & Crash Cycle</strong>
-            <p>You can surge into obsession (a person, a project, an aesthetic, a new identity)… then crash when novelty fades or feedback turns cold. This isn’t laziness—it’s mood-driven motivation. When you feel inspired, you’re unstoppable. When you don’t, reality feels heavy and meaningless.</p>
-
-            <br>
-            <strong>🧠 Rejection Sensitivity</strong>
-            <p>One negative comment can hijack your week because your Threat system treats criticism like social danger. Your brain hears: “If they don’t approve of me, I’m unsafe.” So you either spiral, perform harder, or disappear.</p>
-
-            <br>
-            <strong>🎭 Identity Drift</strong>
-            <p>You risk outsourcing self-worth to external mirrors: attention, validation, desire, likes, praise. That creates an unstable identity—brilliant one day, worthless the next—based on who reflected what back at you.</p>
+            <strong>⛔ CRITICAL FAILURE: The "Validation Trap"</strong>
+            <p>You have outsourced your self-worth to the market. You check for likes, texts, and eyes on you to know if you exist. If the mirror doesn't reflect you back, you panic. You are a masterpiece, but you are trying to be a mirror.</p>
         `,
 
         fix: `
-            <strong>🧩 Patch v1.0: External Structure (Because Willpower Won’t Save You)</strong>
-            <p>You don’t need more motivation. You need <strong>containers</strong>—structures that hold you steady when emotion becomes weather.</p>
-
-            <ul style="text-align: left; margin-top: 10px;">
-            <li><strong>Timeboxing:</strong> Work in short, scheduled blocks even when you don’t “feel like it.” This trains your brain that action is not mood-dependent.</li>
-            <li><strong>Two-Identity Rule:</strong> Separate <em>Self</em> from <em>Output</em>. Criticism of the work is not rejection of the person.</li>
-            <li><strong>DBT Skill: Opposite Action:</strong> When you want to isolate, send one message. When you want to quit, do ten minutes. Tiny opposites break spirals.</li>
-            <li><strong>Validation Diet:</strong> Reduce the frequency of checking external approval (social media, texts) during creative work. Your art dies when your attention becomes a begging bowl.</li>
-            <li><strong>Emotion Delay:</strong> Don’t act on peak emotion. Write the message. Save it. Re-read in 24 hours. Most disasters end here.</li>
-            </ul>
-
-            <p><strong>Final upgrade:</strong> You are not your feelings. You are the one who <em>has</em> them. And you can build a system that makes your sensitivity a weapon of beauty—not a hostage situation.</p>
+            <div class="report-section">
+                <h3 class="report-header">🛠️ THE PATCH: "THE ANCHOR"</h3>
+                <p>You have enough sails. You need an anchor.</p>
+                
+                <ul style="text-align: left; margin-top: 15px;">
+                    <li><strong>The 24-Hour Rule:</strong> When you feel a sudden urge to text, post, or quit—wait 24 hours. Your emotions are data, not directives. Let the storm pass before you steer the ship.</li>
+                    <li><strong>Boredom Tolerance:</strong> Practice doing nothing. No phone. No music. Just sit. You need to relearn that "Peace" is not "Boredom." Peace is the absence of drama.</li>
+                    <li><strong>Separate Art from Self:</strong> If they hate your work, they don't hate you. You must build a wall between your Soul and your Output.</li>
+                </ul>
+                <p><strong>Final Command:</strong> You are not the weather. You are the sky. The weather passes; the sky remains.</p>
+            </div>
         `
-        },
+    },
 
 
     "APOLLO": {
