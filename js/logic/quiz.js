@@ -12,8 +12,98 @@ const form = document.getElementById('quiz-form');
 
 let lastResult = null;
 
+export function resetDiagnostic() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  history.replaceState(null, '', window.location.pathname); // remove ?a=...
+  window.location.reload();
+}
+
 export function getLastResult() {
   return lastResult;
+}
+
+// --------------------
+// Local save (progress + last result)
+// --------------------
+const STORAGE_KEY = 'nousys_quiz_state_v1';
+const STORAGE_TTL_MS = 1000 * 60 * 60 * 24 * 7; // 7 days
+
+function loadSaved() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const obj = JSON.parse(raw);
+    if (obj?.updatedAt && (Date.now() - obj.updatedAt) > STORAGE_TTL_MS) {
+      localStorage.removeItem(STORAGE_KEY);
+      return null;
+    }
+    return obj;
+  } catch {
+    return null;
+  }
+}
+
+function saveSaved(patch) {
+  try {
+    const prev = loadSaved() || {};
+    const next = { ...prev, ...patch, updatedAt: Date.now(), version: 1 };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+  } catch {}
+}
+
+function clearSaved() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch {}
+}
+
+function getAnswersFromForm() {
+  const fd = new FormData(form);
+  const answers = {};
+  questions.forEach(q => {
+    const v = fd.get(q.id);
+    if (v != null) answers[q.id] = Number(v);
+  });
+  return answers;
+}
+
+function applyAnswersToForm(answers) {
+  if (!answers || !form) return;
+  Object.entries(answers).forEach(([qid, val]) => {
+    const input = form.querySelector(`input[name="${qid}"][value="${val}"]`);
+    if (input) input.checked = true;
+  });
+}
+
+function saveProgress() {
+  if (!quizStarted) return;
+  if (!form) return;
+  if (currentQ >= questions.length) return;
+  saveSaved({
+    progress: {
+      currentQ,
+      answers: getAnswersFromForm(),
+      started: true,
+    }
+  });
+}
+
+function restoreProgressIfAny() {
+  const saved = loadSaved();
+  const p = saved?.progress;
+  if (!p?.started || !p?.answers) return false;
+
+  // Apply answers
+  applyAnswersToForm(p.answers);
+
+  // Jump to saved question
+  const idx = (typeof p.currentQ === 'number') ? p.currentQ : 0;
+  const clamped = Math.max(0, Math.min(questions.length - 1, idx));
+
+  document.getElementById(`q-${currentQ}`)?.classList.remove('active');
+  currentQ = clamped;
+  document.getElementById(`q-${currentQ}`)?.classList.add('active');
+
+  setProgressUI();
+  return true;
 }
 
 // --------------------
@@ -38,7 +128,6 @@ function buildResultUrl({ type, sE, sC, sT, sS, wingKey }) {
 
 function updateUrlForResult(payload) {
   const url = buildResultUrl(payload);
-  // Keep same path, update only query (no reload)
   history.replaceState(null, '', `${url.pathname}${url.search}`);
   return url;
 }
@@ -72,8 +161,10 @@ function showWarning(show) {
 // Split-card init
 // --------------------
 function initQuiz() {
-  if (form && form.dataset.initialized === '1') return;
-  if (form) form.dataset.initialized = '1';
+  if (!form) return;
+
+  if (form.dataset.initialized === '1') return;
+  form.dataset.initialized = '1';
 
   const TYPE_TO_SYSTEM = {
     T: 'SYSTEM: THREAT',
@@ -158,6 +249,14 @@ function initQuiz() {
       });
     }
 
+    // autosave on any selection change inside this question
+    div.addEventListener('change', (e) => {
+      if (e.target?.matches?.('input[type="radio"]')) {
+        showWarning(false);
+        saveProgress();
+      }
+    });
+
     form.appendChild(div);
   });
 
@@ -192,7 +291,8 @@ function renderRadarChart({ sE, sC, sT, sS, max }) {
   if (!canvas) return;
 
   if (typeof window.Chart === 'undefined') {
-    console.warn('Chart.js not found. Make sure chart.umd.min.js is loaded BEFORE main.js executes.');
+    // NOTE: for direct-link loads, make sure Chart.js loads before main.js runs.
+    console.warn('Chart.js not found. Ensure chart.umd.min.js loads before your module executes.');
     return;
   }
 
@@ -248,6 +348,12 @@ function startQuiz() {
   track('quiz_start');
 
   initQuiz();
+
+  // Restore (after DOM for questions exists)
+  const restored = restoreProgressIfAny();
+  if (restored) {
+    track('quiz_resume', { question_index: currentQ + 1 });
+  }
 }
 
 function nextQuestion() {
@@ -267,10 +373,14 @@ function nextQuestion() {
   if (currentQ < questions.length) {
     document.getElementById(`q-${currentQ}`)?.classList.add('active');
     setProgressUI();
+    saveProgress();
     track('question_view', { question_index: currentQ + 1 });
   } else {
     const bar = document.getElementById('progress-bar');
     if (bar) bar.style.width = `100%`;
+
+    // completed — no longer "in progress"
+    saveSaved({ progress: { started: false, currentQ: questions.length, answers: getAnswersFromForm() } });
 
     document.getElementById('quiz-screen').style.display = 'none';
     calculateResult();
@@ -287,6 +397,7 @@ function prevQuestion() {
 
   document.getElementById(`q-${currentQ}`)?.classList.add('active');
   setProgressUI();
+  saveProgress();
 
   track('question_view', { question_index: currentQ + 1, nav: 'back' });
 }
@@ -367,12 +478,15 @@ function calculateResult() {
   // save last result (include wing)
   lastResult = { sE, sC, sT, sS, type, wing: wingKey };
 
+  // save locally (result)
+  saveSaved({ lastResult });
+
   track('quiz_complete', { archetype: type });
 
-  // --- Update URL NOW (so shareResult can just use window.location.href) ---
+  // Update URL now (no reload)
   updateUrlForResult({ type, sE, sC, sT, sS, wingKey });
 
-  // --- Render result ---
+  // Render result
   const data = archetypes[type];
   const resScreen = document.getElementById('result-screen');
   resScreen.style.display = 'block';
@@ -395,33 +509,39 @@ function calculateResult() {
   document.getElementById('bar-t').style.width = `${maxT ? (sT / maxT) * 100 : 0}%`;
   document.getElementById('bar-s').style.width = `${maxS ? (sS / maxS) * 100 : 0}%`;
 
-  // Radar chart scale: use the biggest max across traits (usually 30)
+  // Radar chart scale
   renderRadarChart({ sE, sC, sT, sS, max: Math.max(maxE, maxC, maxT, maxS, 1) });
 
-  // Wing UI + link
+  // Wing UI + link (toggle view: open wing as primary, original as secondary)
   const wingText = document.getElementById('result-wing');
   const wingImg = document.getElementById('wing-img');
 
   if (wingKey && archetypes[wingKey]) {
-    const url = buildResultUrl({ type, sE, sC, sT, sS, wingKey }).toString();
-    const wingUrl = new URL(url);
-    wingUrl.searchParams.set('a', wingKey); // link to wing archetype page view
+    const wingViewUrl = buildResultUrl({
+      type: wingKey,
+      sE, sC, sT, sS,
+      wingKey: type, // original becomes secondary
+    }).toString();
 
     if (wingText) {
-      wingText.innerHTML = `Secondary Influence: <strong>${wingKey}</strong> <span style="opacity:0.8;">(${wing.flavor})</span>
-        <br><a href="${wingUrl.toString()}" style="color: var(--primary); text-decoration: underline;">Open ${wingKey} view</a>`;
+      wingText.innerHTML =
+        `Secondary Influence: <strong>${wingKey}</strong> <span style="opacity:0.8;">(${wing.flavor})</span>` +
+        `<br><a href="${wingViewUrl}" style="color: var(--primary); text-decoration: underline;">Open ${wingKey} view</a>`;
     }
 
     if (wingImg) {
       wingImg.src = archetypes[wingKey].img;
       wingImg.style.display = 'block';
       wingImg.style.cursor = 'pointer';
-      wingImg.onclick = () => window.location.href = wingUrl.toString();
+      wingImg.onclick = () => { window.location.href = wingViewUrl; };
     }
   } else {
     if (wingText) wingText.textContent = '';
     if (wingImg) wingImg.style.display = 'none';
   }
+
+  // quiz is done → clear progress (optional)
+  saveSaved({ progress: { started: false, currentQ: 0, answers: null } });
 
   submitToGoogle(sE, sC, sT, sS, type);
 }
@@ -461,7 +581,7 @@ export function renderResultFromUrl() {
   document.getElementById('result-bug').innerHTML = data.bug;
   document.getElementById('result-fix').innerHTML = data.fix;
 
-  // Max per trait based on current question config
+  // Max per trait based on current config
   const nE = questions.filter(q => q.type === 'E').length;
   const nC = questions.filter(q => q.type === 'C').length;
   const nT = questions.filter(q => q.type === 'T').length;
@@ -472,7 +592,6 @@ export function renderResultFromUrl() {
   const maxT = nT * 5;
   const maxS = nS * 5;
 
-  // If URL has scores, render bars + chart
   const sE = (e != null) ? e : 0;
   const sC = (c != null) ? c : 0;
   const sT = (t != null) ? t : 0;
@@ -485,33 +604,37 @@ export function renderResultFromUrl() {
 
   renderRadarChart({ sE, sC, sT, sS, max: Math.max(maxE, maxC, maxT, maxS, 1) });
 
-  // Wing UI (from URL param)
+  // Wing UI (from URL param w=)
   const wingText = document.getElementById('result-wing');
   const wingImg = document.getElementById('wing-img');
 
   if (w && archetypes[w]) {
-    const base = buildResultUrl({ type, sE, sC, sT, sS, wingKey: w }).toString();
-    const wingUrl = new URL(base);
-    wingUrl.searchParams.set('a', w);
+    const wingViewUrl = buildResultUrl({
+      type: w,
+      sE, sC, sT, sS,
+      wingKey: type, // current becomes secondary
+    }).toString();
 
     if (wingText) {
-      wingText.innerHTML = `Secondary Influence: <strong>${w}</strong>
-        <br><a href="${wingUrl.toString()}" style="color: var(--primary); text-decoration: underline;">Open ${w} view</a>`;
+      wingText.innerHTML =
+        `Secondary Influence: <strong>${w}</strong>` +
+        `<br><a href="${wingViewUrl}" style="color: var(--primary); text-decoration: underline;">Open ${w} view</a>`;
     }
 
     if (wingImg) {
       wingImg.src = archetypes[w].img;
       wingImg.style.display = 'block';
       wingImg.style.cursor = 'pointer';
-      wingImg.onclick = () => window.location.href = wingUrl.toString();
+      wingImg.onclick = () => { window.location.href = wingViewUrl; };
     }
   } else {
     if (wingText) wingText.textContent = '';
     if (wingImg) wingImg.style.display = 'none';
   }
 
-  // set lastResult so Share works on direct-link page too
+  // set lastResult so Share works even on direct-link page
   lastResult = { sE, sC, sT, sS, type, wing: w };
+  saveSaved({ lastResult });
 
   track('result_view', { archetype: type, via: 'url' });
 }
@@ -520,6 +643,10 @@ export function renderResultFromUrl() {
 window.addEventListener('pagehide', () => {
   if (!quizStarted) return;
   if (currentQ >= questions.length) return;
+
+  // ensure progress is persisted even if user closes mid-question
+  saveProgress();
+
   track('quiz_abandon', { last_question_index: currentQ + 1 });
 });
 

@@ -85,6 +85,12 @@
         <div class="progress-container">
             <div class="progress-fill" id="progress-bar"></div>
         </div>
+        <button type="button"
+            id="btn-restart"
+            onclick="resetDiagnostic()"
+            style="background: transparent; border: 1px solid rgba(255,255,255,0.15); color:#94a3b8; font-size:0.85rem; padding:10px 14px; border-radius:999px; margin-top:12px;">
+            Restart
+        </button>
 
         <!-- Added: progress text (dynamic via JS) -->
         <div id="progress-text" style="text-align:center; font-size:0.85rem; opacity:0.7; margin-top:10px;">
@@ -103,6 +109,9 @@
             Previous Command
         </button>
         <button id="btn-next" type="button" class="btn" onclick="nextQuestion()">Next Command</button>
+        <button id="btn-restart" type="button" class="btn" onclick="resetDiagnostic()" style="background: transparent; border: 1px solid rgba(255,255,255,0.15); color:#94a3b8; font-size:0.85rem; padding:10px 14px; border-radius:999px; margin-top:12px;">
+            Restart
+        </button>
     </div>
 
     <div id="result-screen" class="result-view">
@@ -181,7 +190,7 @@
             <p id="feedback-status" style="font-size: 0.85rem; opacity: 0.7; display:none; margin-top: 10px;"></p>
         </div>
 
-        <button type="button" class="btn" onclick="window.location.reload()" style="background: transparent; border: 1px solid rgba(255,255,255,0.2); margin-top: 30px; color: #cbd5e1;">Restart Diagnostic</button>
+        <button type="button" class="btn" onclick="resetDiagnostic()" style="background: transparent; border: 1px solid rgba(255,255,255,0.2); margin-top: 30px; color: #cbd5e1;">Restart Diagnostic</button>
     </div>
 </div>
 
