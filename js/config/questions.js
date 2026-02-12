@@ -28,16 +28,16 @@ export const questions = [
   },
   {
     id: "e1",
-    type: "E",
+    type: "E", // Measures Energy (Introvert vs Extrovert)
     reverse: false,
     systemTag: "SYSTEM: ENERGY",
     title: "Trial of Hippolyta's Belt",
-    scene: "You must negotiate for the Belt inside a loud, intense court. The atmosphere can either charge you or drain you before you even speak.",
-    leftOption: "I keep it calm and efficient—too much stimulation drains me.",
-    rightOption: "I lean into the intensity—it energizes and sharpens me.",
-    leftLabel: "Inner Focus",
-    rightLabel: "Outer Stimulus"
-  },
+    scene: "The Queen invites you to negotiate for the Belt in the middle of a deafening, chaotic war-feast. The sensory input is maximum.",
+    leftOption: "The noise scatters my focus. I try to pull her to a quiet corner.",
+    rightOption: "The noise sharpens my focus. I feed off the crowd's energy.",
+    leftLabel: "Overstimulated",
+    rightLabel: "Activated"
+    },
   {
     id: "s1",
     type: "S",
