@@ -1,4 +1,14 @@
+// js/ui/settingsMenu.js
 import { getLang, setLang } from '../services/lang.js';
+
+function syncLangBadge() {
+  const current = getLang();
+  const flagEl = document.getElementById('lang-flag');
+  const codeEl = document.getElementById('lang-code');
+
+  if (flagEl) flagEl.textContent = (current === 'vi') ? '🇻🇳' : '🇺🇸';
+  if (codeEl) codeEl.textContent = (current === 'vi') ? 'VI' : 'EN';
+}
 
 function syncActiveLang() {
   const current = getLang();
@@ -7,61 +17,101 @@ function syncActiveLang() {
     el.classList.toggle('active', active);
     el.setAttribute('aria-checked', active ? 'true' : 'false');
   });
+  syncLangBadge();
 }
 
-function closeMenu() {
-  const menu = document.getElementById('settings-menu');
-  const btn = document.getElementById('settings-btn');
-  if (!menu || !btn) return;
-  menu.hidden = true;
-  btn.setAttribute('aria-expanded', 'false');
+function closeAllPopups() {
+  const langMenu = document.getElementById('settings-menu');
+  const menuPop = document.getElementById('menu-pop');
+
+  const menuBtn = document.getElementById('settings-btn');
+  const langBtn = document.getElementById('lang-btn');
+
+  if (langMenu) langMenu.hidden = true;
+  if (menuPop) menuPop.hidden = true;
+
+  if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false');
+  if (langBtn) langBtn.setAttribute('aria-expanded', 'false');
 }
 
 function toggleMenu(e) {
   e?.stopPropagation?.();
-  const menu = document.getElementById('settings-menu');
+
+  const pop = document.getElementById('menu-pop');
   const btn = document.getElementById('settings-btn');
+  if (!pop || !btn) return;
+
+  const willOpen = pop.hidden;
+  closeAllPopups();
+  pop.hidden = !willOpen;
+  btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+}
+
+function toggleLang(e) {
+  e?.stopPropagation?.();
+
+  const menu = document.getElementById('settings-menu');
+  const btn = document.getElementById('lang-btn');
   if (!menu || !btn) return;
-  const next = menu.hidden; // open if hidden
-  menu.hidden = !next;
-  btn.setAttribute('aria-expanded', next ? 'true' : 'false');
-  if (next) syncActiveLang();
+
+  const willOpen = menu.hidden;
+  closeAllPopups();
+  menu.hidden = !willOpen;
+  btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+
+  if (willOpen) syncActiveLang();
 }
 
 function init() {
-  const btn = document.getElementById('settings-btn');
-  const menu = document.getElementById('settings-menu');
-  if (!btn || !menu) return;
+  const menuBtn = document.getElementById('settings-btn');
+  const langBtn = document.getElementById('lang-btn');
+  const restartBtn = document.getElementById('restart-btn');
 
-  btn.addEventListener('click', toggleMenu);
+  const langMenu = document.getElementById('settings-menu');
+  const menuPop = document.getElementById('menu-pop');
 
-  // close on outside click
-  document.addEventListener('click', () => closeMenu());
+  // If your HTML isn't updated yet, fail safely
+  if (!menuBtn || !langBtn || !restartBtn || !langMenu || !menuPop) {
+    // Still try to at least sync badge if present
+    syncLangBadge();
+    return;
+  }
+
+  // Button wiring
+  menuBtn.addEventListener('click', toggleMenu);
+  langBtn.addEventListener('click', toggleLang);
+
+  restartBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closeAllPopups();
+    if (typeof window.resetDiagnostic === 'function') window.resetDiagnostic();
+    else window.location.href = window.location.pathname;
+  });
+
+  // Close on outside click
+  document.addEventListener('click', () => closeAllPopups());
 
   // ESC closes
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMenu();
+    if (e.key === 'Escape') closeAllPopups();
   });
 
   // Language items
-  menu.querySelectorAll('[data-lang]').forEach((item) => {
+  langMenu.querySelectorAll('[data-lang]').forEach((item) => {
     item.addEventListener('click', (e) => {
       e.stopPropagation();
       const lang = item.getAttribute('data-lang');
-      setLang(lang);           // sets localStorage + ?lang=
-      window.location.reload(); // simplest + reliable for now
+      setLang(lang);             // sets localStorage + ?lang=
+      window.location.reload();  // simplest + reliable
     });
   });
 
-  // Restart
-  const restart = document.getElementById('settings-restart');
-  if (restart) {
-    restart.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (typeof window.resetDiagnostic === 'function') window.resetDiagnostic();
-      else window.location.href = window.location.pathname;
-    });
-  }
+  // Prevent clicks inside popups from closing them
+  langMenu.addEventListener('click', (e) => e.stopPropagation());
+  menuPop.addEventListener('click', (e) => e.stopPropagation());
+
+  // Initial UI sync
+  syncActiveLang();
 }
 
 init();

@@ -33,19 +33,38 @@
 <body>
 
 <div id="app-settings">
-  <button id="settings-btn" type="button" aria-label="Settings" aria-haspopup="menu" aria-expanded="false">
-    ⋯
+  <!-- 1) MENU button (⋯) -->
+  <button id="settings-btn" type="button" aria-label="Menu" aria-haspopup="menu" aria-expanded="false">⋯</button>
+
+  <!-- 2) LANGUAGE button (flag + code) -->
+  <button id="lang-btn" type="button" aria-label="Language" aria-haspopup="menu" aria-expanded="false">
+    <span id="lang-flag" aria-hidden="true">🇺🇸</span>
+    <span id="lang-code" aria-hidden="true">EN</span>
   </button>
 
+  <!-- 3) RESTART button (NOT in menu) -->
+  <button id="restart-btn" type="button" aria-label="Restart" title="Restart">↻</button>
+
+  <!-- Language popup (KEEP ID settings-menu so your CSS class names still work) -->
   <div id="settings-menu" role="menu" hidden>
-    <button class="settings-item" type="button" data-lang="en" role="menuitemradio">English <span class="check">✓</span></button>
-    <button class="settings-item" type="button" data-lang="vi" role="menuitemradio">Tiếng Việt <span class="check">✓</span></button>
+    <button class="settings-item" type="button" data-lang="en" role="menuitemradio">
+      🇺🇸 English <span class="check">✓</span>
+    </button>
+    <button class="settings-item" type="button" data-lang="vi" role="menuitemradio">
+      🇻🇳 Tiếng Việt <span class="check">✓</span>
+    </button>
+  </div>
 
-    <div class="settings-sep"></div>
-
-    <button class="settings-item" type="button" id="settings-restart">Restart</button>
+  <!-- Menu popup (new) -->
+  <div id="menu-pop" role="menu" hidden>
+    <div class="settings-title">Menu</div>
+    <button class="settings-item" type="button" disabled style="opacity:0.65; cursor:default;">
+      (coming soon)
+    </button>
   </div>
 </div>
+
+
 
 <div class="container">
     <div id="intro-screen">
