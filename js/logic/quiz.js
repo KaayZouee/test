@@ -2,6 +2,7 @@ import { questions } from '../config/questions.js';
 import { archetypes } from '../data/archetypes.js';
 import { submitToGoogle } from '../services/google.js';
 import { track } from '../services/analytics.js';
+import { t, getLang, setLang as setLangInternal } from '../services/lang.js';
 
 // --- 3. THE LOGIC ---
 let currentQ = 0;
@@ -11,23 +12,70 @@ let radarChartInstance = null;
 const form = document.getElementById('quiz-form');
 
 let lastResult = null;
-
-export function resetDiagnostic() {
-  try { localStorage.removeItem(STORAGE_KEY); } catch {}
-  history.replaceState(null, '', window.location.pathname); // remove ?a=...
-  window.location.reload();
-}
-
 export function getLastResult() {
   return lastResult;
 }
 
 // --------------------
-// Local save (progress + last result)
+// i18n helpers (safe fallback)
+// --------------------
+function tr(path, fallback) {
+  try {
+    const dict = t?.() || {};
+    const parts = String(path).split('.');
+    let cur = dict;
+    for (const p of parts) cur = cur?.[p];
+    return (cur == null || cur === '') ? fallback : cur;
+  } catch {
+    return fallback;
+  }
+}
+
+function applyStaticUIText() {
+  // Set <html lang="">
+  try { document.documentElement.lang = getLang(); } catch {}
+
+  // These elements may exist before quiz start
+  const prevBtn = document.getElementById('btn-prev');
+  if (prevBtn) prevBtn.textContent = tr('ui.prev', prevBtn.textContent || 'Previous Command');
+
+  const nextBtn = document.getElementById('btn-next');
+  if (nextBtn) nextBtn.textContent = tr('ui.next', nextBtn.textContent || 'Next Command');
+
+  const restartBtn = document.getElementById('btn-restart');
+  if (restartBtn) restartBtn.textContent = tr('ui.restart', restartBtn.textContent || 'Restart');
+
+  const startBtn = document.getElementById('btn-start');
+  if (startBtn) startBtn.textContent = tr('ui.start', startBtn.textContent || 'Initialize System');
+
+  const warn = document.getElementById('quiz-warning');
+  if (warn) warn.textContent = tr('ui.selectWarning', warn.textContent || 'Please select an option.');
+}
+
+// --------------------
+// Reset + Lang globals (for HTML onclick)
 // --------------------
 const STORAGE_KEY = 'nousys_quiz_state_v1';
 const STORAGE_TTL_MS = 1000 * 60 * 60 * 24 * 7; // 7 days
 
+export function resetDiagnostic() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  history.replaceState(null, '', window.location.pathname); // remove query
+  window.location.reload();
+}
+
+// Make callable from HTML
+window.resetDiagnostic = resetDiagnostic;
+
+// Use your lang.js setter, then reload so the quiz/result re-renders in new lang
+window.setLang = (lang) => {
+  try { setLangInternal(lang); } catch {}
+  window.location.reload();
+};
+
+// --------------------
+// Local save (progress + last result)
+// --------------------
 function loadSaved() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -49,10 +97,6 @@ function saveSaved(patch) {
     const next = { ...prev, ...patch, updatedAt: Date.now(), version: 1 };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
   } catch {}
-}
-
-function clearSaved() {
-  try { localStorage.removeItem(STORAGE_KEY); } catch {}
 }
 
 function getAnswersFromForm() {
@@ -91,10 +135,8 @@ function restoreProgressIfAny() {
   const p = saved?.progress;
   if (!p?.started || !p?.answers) return false;
 
-  // Apply answers
   applyAnswersToForm(p.answers);
 
-  // Jump to saved question
   const idx = (typeof p.currentQ === 'number') ? p.currentQ : 0;
   const clamped = Math.max(0, Math.min(questions.length - 1, idx));
 
@@ -133,7 +175,7 @@ function updateUrlForResult(payload) {
 }
 
 // --------------------
-// UI helpers (minimal)
+// UI helpers
 // --------------------
 function setProgressUI() {
   const total = questions.length;
@@ -154,6 +196,7 @@ function setProgressUI() {
 function showWarning(show) {
   const warn = document.getElementById('quiz-warning');
   if (!warn) return;
+  warn.textContent = tr('ui.selectWarning', 'Please select an option.');
   warn.style.display = show ? 'block' : 'none';
 }
 
@@ -162,7 +205,6 @@ function showWarning(show) {
 // --------------------
 function initQuiz() {
   if (!form) return;
-
   if (form.dataset.initialized === '1') return;
   form.dataset.initialized = '1';
 
@@ -192,8 +234,8 @@ function initQuiz() {
           `).join('')}
         </div>
         <div style="display:flex; justify-content:space-between; font-size: 0.8rem; opacity: 0.5; padding: 0 5px;">
-          <span>${q.leftLabel || 'Disagree'}</span>
-          <span>${q.rightLabel || 'Agree'}</span>
+          <span>${q.leftLabel || tr('ui.disagree', 'Disagree')}</span>
+          <span>${q.rightLabel || tr('ui.agree', 'Agree')}</span>
         </div>
       `;
     } else {
@@ -204,18 +246,18 @@ function initQuiz() {
           <div class="q-tag">${systemTag}</div>
           <div class="q-title">${q.title}</div>
           <div class="q-scene">
-            <strong>Scene:</strong> ${q.scene}
+            <strong>${tr('ui.scene', 'Scene:')}</strong> ${q.scene}
           </div>
         </div>
 
         <div class="q-cards">
           <button type="button" class="q-card q-card-left" data-value="1">
-            <div class="q-card-label">Option 1 (Left)</div>
+            <div class="q-card-label">${tr('ui.option1', 'Option 1 (Left)')}</div>
             <div class="q-card-body">${q.leftOption}</div>
           </button>
 
           <button type="button" class="q-card q-card-right" data-value="5">
-            <div class="q-card-label">Option 5 (Right)</div>
+            <div class="q-card-label">${tr('ui.option5', 'Option 5 (Right)')}</div>
             <div class="q-card-body">${q.rightOption}</div>
           </button>
         </div>
@@ -230,12 +272,11 @@ function initQuiz() {
         </div>
 
         <div class="q-scale">
-          <span>${q.leftLabel || 'Left'}</span>
-          <span>${q.rightLabel || 'Right'}</span>
+          <span>${q.leftLabel || tr('ui.left', 'Left')}</span>
+          <span>${q.rightLabel || tr('ui.right', 'Right')}</span>
         </div>
       `;
 
-      // clicking cards selects 1 or 5
       div.querySelectorAll('.q-card').forEach((btn) => {
         btn.addEventListener('click', () => {
           const val = btn.getAttribute('data-value');
@@ -279,7 +320,8 @@ function computeAdaptWing({ avgS, avgRange, avgRecovery, primaryType }) {
   if (primaryType === 'HERMES' || primaryType === 'DEMETER') return null;
 
   const key = (avgRange >= avgRecovery) ? 'HERMES' : 'DEMETER';
-  const flavor = (key === 'HERMES') ? 'Range / Adaptation' : 'Recovery / Regeneration';
+  const flavor = (key === 'HERMES') ? tr('wing.hermesFlavor', 'Range / Adaptation')
+                                   : tr('wing.demeterFlavor', 'Recovery / Regeneration');
   return { key, flavor };
 }
 
@@ -291,7 +333,6 @@ function renderRadarChart({ sE, sC, sT, sS, max }) {
   if (!canvas) return;
 
   if (typeof window.Chart === 'undefined') {
-    // NOTE: for direct-link loads, make sure Chart.js loads before main.js runs.
     console.warn('Chart.js not found. Ensure chart.umd.min.js loads before your module executes.');
     return;
   }
@@ -307,7 +348,12 @@ function renderRadarChart({ sE, sC, sT, sS, max }) {
   radarChartInstance = new window.Chart(ctx, {
     type: 'radar',
     data: {
-      labels: ['Energy', 'Control', 'Threat', 'Adapt'],
+      labels: [
+        tr('ui.energy', 'Energy'),
+        tr('ui.control', 'Control'),
+        tr('ui.threat', 'Threat'),
+        tr('ui.adapt', 'Adapt'),
+      ],
       datasets: [{
         label: 'Scores',
         data: [sE, sC, sT, sS],
@@ -347,9 +393,9 @@ function startQuiz() {
   quizStarted = true;
   track('quiz_start');
 
+  applyStaticUIText();
   initQuiz();
 
-  // Restore (after DOM for questions exists)
   const restored = restoreProgressIfAny();
   if (restored) {
     track('quiz_resume', { question_index: currentQ + 1 });
@@ -379,7 +425,6 @@ function nextQuestion() {
     const bar = document.getElementById('progress-bar');
     if (bar) bar.style.width = `100%`;
 
-    // completed — no longer "in progress"
     saveSaved({ progress: { started: false, currentQ: questions.length, answers: getAnswersFromForm() } });
 
     document.getElementById('quiz-screen').style.display = 'none';
@@ -475,18 +520,13 @@ function calculateResult() {
   const wing = computeAdaptWing({ avgS, avgRange, avgRecovery, primaryType: type });
   const wingKey = wing?.key || null;
 
-  // save last result (include wing)
   lastResult = { sE, sC, sT, sS, type, wing: wingKey };
-
-  // save locally (result)
   saveSaved({ lastResult });
 
   track('quiz_complete', { archetype: type });
 
-  // Update URL now (no reload)
   updateUrlForResult({ type, sE, sC, sT, sS, wingKey });
 
-  // Render result
   const data = archetypes[type];
   const resScreen = document.getElementById('result-screen');
   resScreen.style.display = 'block';
@@ -498,7 +538,6 @@ function calculateResult() {
   document.getElementById('result-bug').innerHTML = data.bug;
   document.getElementById('result-fix').innerHTML = data.fix;
 
-  // Bars (dynamic max)
   const maxE = nE * 5;
   const maxC = nC * 5;
   const maxT = nT * 5;
@@ -509,10 +548,9 @@ function calculateResult() {
   document.getElementById('bar-t').style.width = `${maxT ? (sT / maxT) * 100 : 0}%`;
   document.getElementById('bar-s').style.width = `${maxS ? (sS / maxS) * 100 : 0}%`;
 
-  // Radar chart scale
   renderRadarChart({ sE, sC, sT, sS, max: Math.max(maxE, maxC, maxT, maxS, 1) });
 
-  // Wing UI + link (toggle view: open wing as primary, original as secondary)
+  // Wing UI + link
   const wingText = document.getElementById('result-wing');
   const wingImg = document.getElementById('wing-img');
 
@@ -520,13 +558,14 @@ function calculateResult() {
     const wingViewUrl = buildResultUrl({
       type: wingKey,
       sE, sC, sT, sS,
-      wingKey: type, // original becomes secondary
+      wingKey: type,
     }).toString();
 
     if (wingText) {
       wingText.innerHTML =
-        `Secondary Influence: <strong>${wingKey}</strong> <span style="opacity:0.8;">(${wing.flavor})</span>` +
-        `<br><a href="${wingViewUrl}" style="color: var(--primary); text-decoration: underline;">Open ${wingKey} view</a>`;
+        `${tr('ui.secondaryInfluence', 'Secondary Influence:')} <strong>${wingKey}</strong> ` +
+        `<span style="opacity:0.8;">(${wing.flavor})</span>` +
+        `<br><a href="${wingViewUrl}" style="color: var(--primary); text-decoration: underline;">${tr('ui.openView', 'Open')} ${wingKey} ${tr('ui.view', 'view')}</a>`;
     }
 
     if (wingImg) {
@@ -540,7 +579,7 @@ function calculateResult() {
     if (wingImg) wingImg.style.display = 'none';
   }
 
-  // quiz is done → clear progress (optional)
+  // quiz done → clear progress (keep lastResult)
   saveSaved({ progress: { started: false, currentQ: 0, answers: null } });
 
   submitToGoogle(sE, sC, sT, sS, type);
@@ -558,19 +597,19 @@ export function renderResultFromUrl() {
   const data = archetypes[type];
   if (!data) return;
 
+  applyStaticUIText();
+
   const e = intParam(params, 'e');
   const c = intParam(params, 'c');
-  const t = intParam(params, 't');
-  const s = intParam(params, 's');
+  const tV = intParam(params, 't');
+  const sV = intParam(params, 's');
   const w = params.get('w') ? params.get('w').toUpperCase() : null;
 
-  // Hide intro/quiz
   const intro = document.getElementById('intro-screen');
   const quiz = document.getElementById('quiz-screen');
   if (intro) intro.style.display = 'none';
   if (quiz) quiz.style.display = 'none';
 
-  // Show result
   const resScreen = document.getElementById('result-screen');
   if (resScreen) resScreen.style.display = 'block';
 
@@ -581,7 +620,6 @@ export function renderResultFromUrl() {
   document.getElementById('result-bug').innerHTML = data.bug;
   document.getElementById('result-fix').innerHTML = data.fix;
 
-  // Max per trait based on current config
   const nE = questions.filter(q => q.type === 'E').length;
   const nC = questions.filter(q => q.type === 'C').length;
   const nT = questions.filter(q => q.type === 'T').length;
@@ -594,8 +632,8 @@ export function renderResultFromUrl() {
 
   const sE = (e != null) ? e : 0;
   const sC = (c != null) ? c : 0;
-  const sT = (t != null) ? t : 0;
-  const sS = (s != null) ? s : 0;
+  const sT = (tV != null) ? tV : 0;
+  const sS = (sV != null) ? sV : 0;
 
   document.getElementById('bar-e').style.width = `${maxE ? (sE / maxE) * 100 : 0}%`;
   document.getElementById('bar-c').style.width = `${maxC ? (sC / maxC) * 100 : 0}%`;
@@ -604,7 +642,7 @@ export function renderResultFromUrl() {
 
   renderRadarChart({ sE, sC, sT, sS, max: Math.max(maxE, maxC, maxT, maxS, 1) });
 
-  // Wing UI (from URL param w=)
+  // Wing UI (from URL w=)
   const wingText = document.getElementById('result-wing');
   const wingImg = document.getElementById('wing-img');
 
@@ -612,13 +650,13 @@ export function renderResultFromUrl() {
     const wingViewUrl = buildResultUrl({
       type: w,
       sE, sC, sT, sS,
-      wingKey: type, // current becomes secondary
+      wingKey: type,
     }).toString();
 
     if (wingText) {
       wingText.innerHTML =
-        `Secondary Influence: <strong>${w}</strong>` +
-        `<br><a href="${wingViewUrl}" style="color: var(--primary); text-decoration: underline;">Open ${w} view</a>`;
+        `${tr('ui.secondaryInfluence', 'Secondary Influence:')} <strong>${w}</strong>` +
+        `<br><a href="${wingViewUrl}" style="color: var(--primary); text-decoration: underline;">${tr('ui.openView', 'Open')} ${w} ${tr('ui.view', 'view')}</a>`;
     }
 
     if (wingImg) {
@@ -632,7 +670,6 @@ export function renderResultFromUrl() {
     if (wingImg) wingImg.style.display = 'none';
   }
 
-  // set lastResult so Share works even on direct-link page
   lastResult = { sE, sC, sT, sS, type, wing: w };
   saveSaved({ lastResult });
 
@@ -644,10 +681,11 @@ window.addEventListener('pagehide', () => {
   if (!quizStarted) return;
   if (currentQ >= questions.length) return;
 
-  // ensure progress is persisted even if user closes mid-question
   saveProgress();
-
   track('quiz_abandon', { last_question_index: currentQ + 1 });
 });
+
+// Run once (safe, DOM exists because module is at end of body)
+applyStaticUIText();
 
 export { startQuiz, nextQuestion, prevQuestion };

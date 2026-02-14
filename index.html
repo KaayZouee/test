@@ -36,6 +36,19 @@
     <div id="intro-screen">
         <h1>NOUSYS</h1>
 
+        <div style="display:flex; justify-content:center; gap:10px; margin: 10px 0 0;">
+        <button type="button"
+            onclick="setLang('en')"
+            style="background:transparent; border:1px solid rgba(255,255,255,0.15); color:#cbd5e1; padding:8px 12px; border-radius:999px; cursor:pointer;">
+            EN
+        </button>
+        <button type="button"
+            onclick="setLang('vi')"
+            style="background:transparent; border:1px solid rgba(255,255,255,0.15); color:#cbd5e1; padding:8px 12px; border-radius:999px; cursor:pointer;">
+            VI
+        </button>
+        </div>
+
         <!-- Headline -->
         <h3 style="font-family: 'Inter'; font-weight: 300; letter-spacing: 2px; font-size: 1rem;">
             ARCHETYPE DECODER
@@ -78,7 +91,7 @@
             </div>
         </div>
         <div style="margin: 1rem 0; font-size: 0.85rem; color: #888;">This test is only for entertainment purposes and does not provide a professional psychological assessment.</div>
-        <button type="button" class="btn" onclick="startQuiz()">Initialize System</button>
+        <button id="btn-start" type="button" class="btn" onclick="startQuiz()">Initialize System</button>
     </div>
 
     <div id="quiz-screen" style="display: none;">
