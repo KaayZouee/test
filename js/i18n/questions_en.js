@@ -144,76 +144,77 @@ export default {
     "leftLabel": "Rigid Mastery",
     "rightLabel": "Extreme Adaptation"
   },
-  t5: {
-    systemTag: "SYSTEM: THREAT",
-    title: "The Narrow Pass",
-    scene: "You must carry a sacred flame across a narrow pass before the storm closes it. Conditions shift unpredictably. Hesitation costs Time and Progress.",
-    leftOption: "I become hyper-cautious; I double-check every step before moving.",
-    rightOption: "I stay loose and fluid; I trust my reflexes to handle surprises.",
-    leftLabel: "Caution",
-    rightLabel: "Fluidity"
+  "t5": {
+    "systemTag": "SYSTEM: THREAT",
+    "title": "The Narrow Pass",
+    "scene": "A violent blizzard suddenly engulfs the narrow mountain ledge to Delphi, wiping out the trail ahead. Ice coats the crumbling stone beneath your boots, and the screaming wind tears the torch from your hand.",
+    "leftOption": "I drop to one knee and press my shoulder to the rock face. I sweep my spear shaft across the ice to find the ledge by feel, placing my weight only when the stone answers solid under the tip.",
+    "rightOption": "I lean into the wind and keep my stride moving at a brisk march. I trust my boots to find the stone and my balance to catch me if the ice breaks, riding the momentum through the whiteout.",
+    "leftLabel": "Calculated Steps",
+    "rightLabel": "Momentum in Fog"
   },
-  c5: {
-    systemTag: "SYSTEM: CONTROL",
-    title: "The Poisoned Well",
-    scene: "The village drinks from one well. If it's poisoned, people fall sick; if you close it wrongly, unrest spreads and you lose Honor and Allies' trust.",
-    leftOption: "I take small reversible actions to learn fast (tiny trials, quick feedback).",
-    rightOption: "I run a clear verification protocol before making a public decision.",
-    leftLabel: "Probe & Learn",
-    rightLabel: "Protocol & Verify"
+  "c5": {
+    "systemTag": "SYSTEM: CONTROL",
+    "title": "The Poisoned Well",
+    "scene": "Black, acidic venom from a slain hydra is seeping into the village’s stone cistern, eating through the mortar. The pressure is building against the cracked retaining wall, threatening to flood the lower streets with toxic sludge.",
+    "leftOption": "I trace the intake pipes and jam them with split stakes, cutting the feed before it can swell. I carve a controlled spillway into the dry riverbed and brace the seam with fresh stone while the wall still holds.",
+    "rightOption": "I punch a breach where the wall is already failing and watch how the sludge surges, then immediately pile earth to turn it. I keep opening and redirecting in quick bursts, shaping the flow as it fights for the lowest street.",
+    "leftLabel": "Systematic Isolation",
+    "rightLabel": "Break & Iterate"
   },
-  e5: {
-    systemTag: "SYSTEM: ENERGY",
-    title: "The Silent Shrine",
-    scene: "To receive the shrine's blessing, you must hold a 3-hour vigil in absolute silence—no speaking, no movement, no distraction. Breaking the ritual costs Honor and delays Progress.",
-    leftOption: "The stillness drains me. I become restless and feel my energy leaking without stimulation.",
-    rightOption: "The stillness restores me. My energy becomes steady and clear as the hours pass.",
-    leftLabel: "Stillness Drains",
-    rightLabel: "Stillness Restores"
+  "e5": {
+    "systemTag": "SYSTEM: ENERGY",
+    "title": "Cave of Hypnos",
+    "scene": "You stand watch deep in the Cave of Hypnos, where thick poppy incense hangs motionless in the air. The silence is so heavy you hear your own joints shift, and the stillness presses against your ears like damp wool.",
+    "leftOption": "I plant my back to the stone and let the hush settle over my hands until they stop trembling. I hold my breath slow and steady and scan the dark seam by seam, letting the quiet keep my sight sharp.",
+    "rightOption": "I grind my boots against the gravel and strike my sword hilt against my bronze greaves. I force noise and friction into the dead space, needing the sting of sound to keep my mind alert and blood moving.",
+    "leftLabel": "Draw from Stillness",
+    "rightLabel": "Create Friction"
   },
-  s5: {
-    systemTag: "SYSTEM: STRETCH",
-    title: "The Long Watch",
-    scene: "You must guard a gate until dawn. Nothing happens for hours—same view, same posture, same routine. If your attention slips, you lose Allies' trust and your Progress resets.",
-    leftOption: "I stay alert by rotating attention deliberately (scan cycles, checkpoints, small rituals).",
-    rightOption: "I can hold steady single-point focus for hours without needing variation.",
-    leftLabel: "Rotate Attention",
-    rightLabel: "Laser Focus"
+  "s5": {
+    "systemTag": "SYSTEM: STRETCH",
+    "title": "Grappling Proteus",
+    "scene": "You grapple the sea-god Proteus as he thrashes through shapes in your grip—lion muscle, slick serpent, then a surge of cold water that tries to pour through your arms. Sand gives way under your feet as the fight rewrites its rules again and again.",
+    "leftOption": "I clamp my foundational wrestling grip and drive my weight into the beach, keeping one clean frame no matter what he becomes. I keep returning to the same holds and pressure, trusting drilled mechanics to keep his center pinned.",
+    "rightOption": "I change my grip the moment his body changes, translating each new shape into a new kind of leverage without losing contact. I let the strain of constant rethinking hit full force and keep updating my attack as the rules flip under my hands.",
+    "leftLabel": "Lock the Paradigm",
+    "rightLabel": "Fluid Adaptation"
   },
-  s6: {
-    systemTag: "SYSTEM: STRETCH",
-    title: "The Wound of Words",
-    scene: "After a public mistake, an ally criticizes you sharply in front of everyone. If you spiral, you lose Time and Progress on the next trial.",
-    leftOption: "I ignore the noise; results will speak louder than their words.",
-    rightOption: "I take it seriously; I need to resolve the accusation before moving on.",
-    leftLabel: "Reset",
-    rightLabel: "Process"
+  {
+  "s6": {
+    "systemTag": "SYSTEM: STRETCH",
+    "title": "Trial of the Bronze Giant",
+    "scene": "The bronze giant Talos patrols the cliffs of Crete, heating his metallic body until the air shimmers. Your standard spear shatters against his ankle, and he turns his blank, glowing face toward you.",
+    "leftOption": "I brace behind my shield and keep hammering the same buckled joint with the broken shaft, holding one hard rhythm under the heat. I stay inside that drilled frame and grind pressure into the weak spot until it gives.",
+    "rightOption": "I fling the shattered spear into the sea and climb the scorching rock to get above his reach. I drop onto his shoulders and improvise new leverage with my hands, prying at the glowing valves before he can shake me off.",
+    "leftLabel": "Deepen Mastery",
+    "rightLabel": "Pivot Tactics"
   },
-  c6: {
-    systemTag: "SYSTEM: CONTROL",
-    title: "The Labyrinth of Doors",
-    scene: "You must reach the exit before the torches burn out. Some doors loop you back; some traps waste Time and Progress.",
-    leftOption: "I search for rules/patterns first, then commit decisively.",
-    rightOption: "I try paths quickly and adjust based on what happens.",
-    leftLabel: "Map First",
-    rightLabel: "Explore Routes"
+  "c6": {
+    "systemTag": "SYSTEM: CONTROL",
+    "title": "The Labyrinth of Daedalus",
+    "scene": "You are deep in the Labyrinth of Daedalus where the massive stone walls grind and shift without warning. The air chokes with dust, and the roar of the Minotaur echoes from multiple directions at once.",
+    "leftOption": "I pull a spool of twine from my belt and anchor it to a heavy sconce. I mark each junction with quick chalk signs and keep a clean route, refusing to waste steps on the same dead end twice.",
+    "rightOption": "I sprint the nearest corridor and test turns as I hit them, cutting hard when the passage tightens or the air goes stale. I keep ricocheting and correcting at speed, letting each wrong turn teach me the next angle to try.",
+    "leftLabel": "Map the System",
+    "rightLabel": "Learn by Speed"
   },
-  e6: {
-    systemTag: "SYSTEM: ENERGY",
-    title: "The Market of Hermes",
-    scene: "You must bargain for a rare item before it's gone. Vendors shout, deals change, strangers interrupt, and new info arrives every minute.",
-    leftOption: "I filter out the noise; I focus better in a controlled environment.",
-    rightOption: "This chaos energizes me; rapid change keeps me sharp and switched on.",
-    leftLabel: "Filtered",
-    rightLabel: "Open"
+  "e6": {
+    "systemTag": "SYSTEM: ENERGY",
+    "title": "The Market of Hermes",
+    "scene": "The thieves' market of Hermes is a crushing bottleneck of sweating bodies, shouting merchants, and braying pack animals. Spice smoke burns your eyes, and a dozen hands pull at your cloak to offer shifting deals.",
+    "leftOption": "I slip into the shadow under a hanging canvas and keep moving along the stalls where the noise thins. From that quieter lane I trade in short gestures and quick glances, keeping my head clear as I work my way through.",
+    "rightOption": "I shove into the center of the trading pit and throw my voice over the braying mules and shouting prices. I ride the crush and the noise, letting the friction of the crowd keep my attention bright as I bargain and push forward.",
+    "leftLabel": "Quiet Edge",
+    "rightLabel": "Center of Chaos"
   },
-  t6: {
-    systemTag: "SYSTEM: THREAT",
-    title: "Judgment of Olympus",
-    scene: "You must demonstrate your skill before the gods to earn passage. They watch in silence—no feedback, no clues. A shaky performance costs Honor and delays Progress.",
-    leftOption: "I trust my training and flow; I don't look back.",
-    rightOption: "I constantly self-monitor to ensure I'm not making a mistake.",
-    leftLabel: "Flow State",
-    rightLabel: "Self-Check"
+  "t6": {
+    "systemTag": "SYSTEM: THREAT",
+    "title": "The Fog of Oceanus",
+    "scene": "You must row a skiff across the River Oceanus, but an unnatural fog rolls over the black water and swallows the bow of your own boat. Wet scraping sounds echo from beneath the hull, and the far shore vanishes into the gray.",
+    "leftOption": "I draw the oars in and let the skiff drift, keeping my body low and still to hear what moves around me. I test the water with the oar-blade and wait for a sound or splash that gives the circle away before I strike.",
+    "rightOption": "I seize my spear and drive it into the water where the scraping is closest, forcing an answer in the murk. I keep stabbing and shoving until something breaks the surface, committing to the clash before I ever see its shape.",
+    "leftLabel": "Hold for Clarity",
+    "rightLabel": "Force the Threat"
   }
 };
