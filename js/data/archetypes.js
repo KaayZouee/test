@@ -206,7 +206,7 @@ export const archetypes = {
             </ul>
             </div>
         `
-        }
+        },
 
     "ARTEMIS": {
         name: "ARTEMIS",
@@ -421,69 +421,73 @@ export const archetypes = {
         name: "HEPHAESTUS",
         role: "THE DEEP MAKER",
         img: "img/Hephaestus.png",
-        code: "Low E • Low C • Low T",
+        code: "Low E • High C • Low T",
 
         desc: `
             <div class="report-section">
-                <h3 class="report-header">💀 THE ROAST</h3>
-                <p><strong>You prefer tools to humans because tools don't have changing moods.</strong></p>
-                <p>You aren't just "introverted"; you are <strong>selectively mute</strong> around inefficiency. You have structured your life to minimize "social transaction costs." You view small talk not just as boring, but as a literal tax on your battery. You are the person who can focus for 12 hours straight but needs a 2-hour nap after a 15-minute phone call.</p>
-                <p>You hide in your work. You tell yourself you are "dedicated to the craft," but often you are just <strong>hiding from the chaos of intimacy</strong>. It is easier to debug code or sculpt clay than to navigate the messy, illogical emotions of another human being.</p>
+            <h3 class="report-header">💀 THE ROAST</h3>
+            <p>You call it “craft.” It’s a hiding strategy with good branding.</p>
+            <p>You pick problems that can’t talk back. Hardware obeys physics, so you park your life there and label it “focus.” Basic social interaction drains you fast, so you treat it like a tax you didn’t agree to pay.</p>
+            <p>Your workbench becomes your bunker because it gives you control, predictable rules, and an exit button.</p>
             </div>
 
             <br>
             <div class="report-section">
-                <h3 class="report-header">🔨 THE OPERATING SYSTEM</h3>
-                <p><strong>System Core: Conservation of Energy.</strong></p>
-                <p>You operate on the <strong>Maker OS</strong>. You have "Low Threat" sensitivity, which gives you a superpower: <strong>Immunity to Drama</strong>. You don't scan the room for approval. You don't care about status games. You care about <em>output</em>.</p>
-                <p><strong>Cognitive Style: The Tunnel Vision.</strong></p>
-                <p>Your brain is designed for <strong>Deep Work</strong>. You don't multitask. You go deep. You are one of the few archetypes capable of true "Flow State" on command. However, this means you struggle with "Context Switching." When someone interrupts you, you react with disproportionate internal rage because they didn't just break your focus—they broke your world.</p>
+            <h3 class="report-header">🔨 THE OPERATING SYSTEM</h3>
+            <p><strong>System core: deep focus with low interaction bandwidth.</strong></p>
+            <p>Your attention system is built for long, uninterrupted runs. High control keeps standards tight and execution consistent over time. Low threat reduces emotional noise and status sensitivity, so external pressure rarely moves your needle.</p>
+            <p>Low energy changes the economics. Context switching burns you down, and interruption forces a costly reload of mental state.</p>
+            <p><strong>Cognitive style: single-thread execution.</strong></p>
+            <p>You queue tasks instead of juggling them. Interruptions trigger irritation because your system just lost state and has to rebuild it under someone else’s timeline.</p>
             </div>
 
             <br>
             <div class="report-section">
-                <h3 class="report-header">🧊 THE FATAL ERROR: "THE OBSERVER TRAP"</h3>
-                <p>Your bug is <strong>Detachment</strong>.</p>
-                <p>You treat life like a simulation that you are watching, rather than playing. You stay on the sidelines, analyzing, building, and fixing, but rarely <em>feeling</em>.</p>
-                <p><strong>The Relational Glitch:</strong></p>
-                <ol style="text-align: left; margin-top: 10px; padding-left: 20px;">
-                    <li>You prioritize your projects over people.</li>
-                    <li>People try to connect with you, but you feel "busy."</li>
-                    <li>They stop trying because you seem indifferent.</li>
-                    <li>You notice they are gone, shrug, and go back to work.</li>
-                    <li>Decades later, you realize you built a masterpiece but have no one to show it to.</li>
-                </ol>
+            <h3 class="report-header">🧊 THE FATAL ERROR: THE OBSERVER TRAP</h3>
+            <p>You treat detachment as an efficiency strategy and then act surprised when your life feels empty.</p>
+            <p>You treat life like a test environment, measuring and optimizing from a safe distance while avoiding the messy feedback that comes from being emotionally present.</p>
+            <p><strong>The loop:</strong> pick a hard technical target → cut contact to protect state → ship something clean → return late to the humans → get a colder reception → retreat back to the build to avoid that hit.</p>
+            <p><strong>Example:</strong> you spend six weekends polishing backend architecture while ignoring repeated bids for attention, then expect the final deployment to register as care. It registers as absence.</p>
             </div>
 
             <br>
             <div class="report-section">
-                <h3 class="report-header">💞 SOCIAL DYNAMICS</h3>
-                <p><strong>Love Language: Service (from a distance).</strong></p>
-                <p>You show love by fixing things. You fixed their car? That was a sonnet. You upgraded their RAM? That was a marriage proposal. You are confused when they want "quality time" (talking about nothing) because you assume <em>utility</em> is the highest form of love.</p>
-                <p><strong>The Conflict Pattern:</strong></p>
-                <p>You don't fight. You <strong>Shut Down</strong>. You go into "Low Power Mode." Your partner screams, and you just stare blankly, waiting for them to run out of logic errors.</p>
+            <h3 class="report-header">💞 SOCIAL & ROMANTIC DYNAMICS</h3>
+            <p><strong>Love language: maintenance tickets.</strong></p>
+            <p>You show care through repairs, upgrades, and logistics because tasks feel safe and measurable. You assume stability in the environment creates stability in the bond.</p>
+            <p>You demand exact logical inputs from a partner who simply requires your physical presence, so you convert emotional moments into analysis sessions and call it “being helpful.”</p>
+            <p>Your habit of “processing” mid-conflict forces your partner to experience a sudden, total abandonment, followed by a long silence that you treat as neutral downtime.</p>
+            </div>
+
+            <br>
+            <div class="report-section">
+            <h3 class="report-header">💼 CAREER & LEADERSHIP</h3>
+            <p><strong>The glass ceiling: the high-output silo.</strong></p>
+            <p>You dominate as an individual contributor because you can hold complexity, maintain standards, and keep shipping under minimal supervision.</p>
+            <p>Management requires throughput across people, not just code. You avoid alignment, delay updates, and treat communication as overhead, so the team routes around you and stops trusting you as a decision surface.</p>
+            <p>Your absolute lack of a user interface permanently caps your skill.</p>
             </div>
         `,
 
         bug: `
-            <strong>⛔ CRITICAL FAILURE: The "Object Over People" Bias</strong>
-            <p>You find comfort in things—systems, code, wood, metal—because they obey the laws of physics. Humans do not. Your fatal flaw is treating humans like broken machines that need "troubleshooting" rather than emotional beings that need "witnessing."</p>
+            <strong>⛔ CRITICAL FAILURE: The Flawless Vacuum</strong>
+            <p>Ten years from now, your life will run perfectly clean. You will experience zero interruptions, zero arguments, and absolutely no invitations.</p>
+            <p>Your work will be solid and your environment will be optimized, but you will become “brilliant” and “hard to reach” in the same sentence. You will notice the silence, then rationalize it as preference because that story hurts less.</p>
         `,
 
         fix: `
             <div class="report-section">
-                <h3 class="report-header">🛠️ THE PATCH: "THE INTERFACE PROTOCOL"</h3>
-                <p>You don't need to change your nature. You need to build a better <strong>User Interface</strong> for your personality.</p>
-                
-                <ul style="text-align: left; margin-top: 15px;">
-                    <li><strong>The "5-Minute" Bridge:</strong> You don't need to be social for hours. Just give 5 minutes of undivided, phone-down attention to your key people every day. That is the maintenance cost of a relationship.</li>
-                    <li><strong>Narrate Your Process:</strong> People think you are angry when you are quiet. Fix this by narrating: <em>"I am not mad, I am just thinking deeply about this problem."</em> This one sentence saves marriages.</li>
-                    <li><strong>Ship It Imperfectly:</strong> You hide in the "refinement phase" to avoid judgment. Force yourself to show your work before it is ready. Feedback is not an attack; it is data.</li>
-                </ul>
-                <p><strong>Final Command:</strong> The sword is useless if it stays in the forge. You must bring your work—and yourself—out into the light.</p>
+            <h3 class="report-header">🛠️ THE PATCH: THE INTERFACE PROTOCOL</h3>
+            <p>You require a scheduled, strictly explicit protocol because your default mode does not maintain bonds.</p>
+
+            <ul style="text-align: left; margin-top: 15px;">
+                <li><strong>The ping protocol:</strong> Five minutes daily, device-free, with one real question and one follow-up. Failing to allocate five minutes is active avoidance, not operational overload.</li>
+                <li><strong>Verbalize the standby:</strong> When you need processing time, state it and give a return time, then return on schedule. Silence gets interpreted as contempt even when you mean nothing by it.</li>
+                <li><strong>The deployment mandate:</strong> Ship before it feels perfect and put it in front of users within a bounded window. Process this feedback purely as data collection.</li>
+            </ul>
             </div>
         `
-    },
+        },
 
     "HERA": {
         name: "HERA",
