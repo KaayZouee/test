@@ -38,6 +38,11 @@ function refreshPremiumUI() {
   const res = getLastResult();
   const nS = questions.filter(q => q.type === 'S').length;
 
+  // Get archetype from result OR URL params
+  const params = new URLSearchParams(window.location.search);
+  const urlType = params.get('a')?.toUpperCase();
+  const archetype = res?.type || urlType || 'UNKNOWN';
+
   const sNoteEl = document.getElementById('premium-s-note');
   const formEl = document.getElementById('premium-form');
   const openBtn = document.getElementById('premium-open');
@@ -47,7 +52,7 @@ function refreshPremiumUI() {
 
   if (!openBtn || !formEl || !submitBtn || !emailEl) return;
 
-  // Always show fake door; only show S-note if we have S
+  // Always show fake door; only show S-note if we have S data
   const hasS = !!(res && typeof res.sS === 'number' && nS > 0);
   const avgS = hasS ? (res.sS / nS) : null;
 
@@ -70,12 +75,11 @@ function refreshPremiumUI() {
       statusEl.textContent = '';
       statusEl.style.display = 'none';
     }
-    track('premium_open_click', { archetype: res?.type || 'UNKNOWN' });
+    track('premium_open_click', { archetype });
   };
 
   submitBtn.onclick = async () => {
     const email = String(emailEl.value || '').trim();
-    const archetype = res?.type || 'UNKNOWN';
 
     if (statusEl) {
       statusEl.style.display = 'block';
@@ -95,7 +99,7 @@ function refreshPremiumUI() {
     const ok = await submitEmailToGoogle(email, archetype, hasS ? res.sS : undefined);
 
     if (ok) {
-      if (statusEl) statusEl.textContent = 'Thanks! We’ll notify you.';
+      if (statusEl) statusEl.textContent = 'Thanks! We'll notify you.';
       track('premium_email_submit_success', { archetype });
     } else {
       if (statusEl) statusEl.textContent = 'Error sending. Please try again.';
@@ -103,6 +107,7 @@ function refreshPremiumUI() {
     }
   };
 }
+
 
 
 // --------------------
