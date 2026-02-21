@@ -45,6 +45,22 @@ export function submitToGoogle(e, c, t, s, sRange, sRecovery, type) {
     .catch(err => console.log('Headless submit error', err));
 }
 
+export async function submitFeedbackToGoogle(rating, feedbackText, archetype) {
+  const data = new FormData();
+  data.append(ENTRY_RATING, rating);
+  data.append(ENTRY_TEXT, feedbackText || '');
+  data.append(ENTRY_ARCHETYPE, archetype);
+  data.append(ENTRY_SESSION, getSessionId());
+
+  try {
+    await fetch(submitURL, { method: 'POST', mode: 'no-cors', body: data });
+    return true;
+  } catch (err) {
+    console.log('Headless feedback submit error', err);
+    return false;
+  }
+}
+
 export async function submitEmailToGoogle(email, archetype, sTotal) {
   const data = new FormData();
   data.append(ENTRY_EMAIL, email);
